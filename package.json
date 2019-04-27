@@ -1,0 +1,8 @@
+{
+  "name": "web_api_template",
+  "version": "1.0.0",
+  "description": "Web Api Template for Node.js",
+  "main": "index.js",
+  "author": "Jeremiah Olufayo",
+  "license": "MIT"
+}
