@@ -7,7 +7,7 @@ export default async ({ app }) => {
   app.head('/status', (req, res) => { res.status(200).end(); });
   app.enable('trust proxy');
 
-  // accept all cross origin requests§
+  // Enable Cross Origin Resource Sharing to all origins
   app.use(cors());
 
   // Log requests to the console.
@@ -17,6 +17,11 @@ export default async ({ app }) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  // Return the express app
-  return app;
+  // error handlers
+  app.use('*', (req, res, next) => {
+    res.status(404).json({
+      message: 'Well, will you help build this route? 🤷🏼‍♂️',
+    });
+    next();
+  });
 };
