@@ -1,9 +1,10 @@
+import BaseController from './BaseController';
 import TodoService from '../services/TodoService';
 
 /**
  * @description TodosController
  */
-class TodosController {
+class TodosController extends BaseController {
   /**
    *@description Creates a new todo
    *@param  {Object} req - Request sent to the router
@@ -11,12 +12,13 @@ class TodosController {
    *@returns {object} - status code, message and the new todo
    *@memberof ContactController
    */
-  static async addTodo(req, res) {
+  async addTodo(req, res) {
     try {
       const newTodo = await TodoService.saveTodo(req.body);
-      return res.status(201).json({ message: 'New todo created', newTodo });
+      const message = 'New todo created';
+      return super.success(res, 201, message, newTodo);
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+      return super.error(res, error);
     }
   }
 }

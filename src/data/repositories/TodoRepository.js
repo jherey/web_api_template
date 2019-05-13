@@ -1,5 +1,5 @@
 import BaseRepository from './BaseRepository';
-import todoSchema from '../models/TodoSchema';
+import todoSchema from '../schemas/TodoSchema';
 
 /**
  * @description BaseRepository

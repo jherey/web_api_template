@@ -1,4 +1,5 @@
 import { model } from 'mongoose';
+import DocumentNotFound from './RepositoryErrors';
 
 /**
  * @description BaseRepository
@@ -83,7 +84,7 @@ export default class BaseRepository {
   async findById(id) {
     try {
       const document = await this.model.findOne({ _id: id }).exec();
-      if (!document) throw new Error(`${this.name} not found`);
+      if (!document) throw new DocumentNotFound(`${this.name} not found`);
       return document;
     } catch (error) {
       throw error;
@@ -99,7 +100,7 @@ export default class BaseRepository {
   async update(id, options) {
     try {
       const document = await this.model.findOneAndUpdate({ _id: id }, options, { new: true });
-      if (!document) throw new Error(`${this.name} not found`);
+      if (!document) throw new DocumentNotFound(`${this.name} not found`);
       return document;
     } catch (error) {
       throw error;
@@ -117,7 +118,7 @@ export default class BaseRepository {
     try {
       const document = await this.model
         .findOneAndUpdate(query, { $addToSet: { [fieldToPushTo]: value } }, { new: true });
-      if (!document) throw new Error(`${this.name} not found`);
+      if (!document) throw new DocumentNotFound(`${this.name} not found`);
       return document;
     } catch (error) {
       throw error;
