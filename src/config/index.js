@@ -10,4 +10,7 @@ export default {
     level: process.env.LOG_LEVEL,
     filename: process.env.LOG_FILE,
   },
+  api: {
+    prefix: process.env.API_PREFIX,
+  },
 };
