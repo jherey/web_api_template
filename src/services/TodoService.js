@@ -1,4 +1,5 @@
 import TodoRepository from '../data/repositories/TodoRepository';
+import agenda from '../jobs/agenda';
 
 const todoRepository = new TodoRepository();
 
@@ -15,6 +16,9 @@ export default class TodoService {
   static async saveTodo(todoData) {
     try {
       const newTodo = await todoRepository.create(todoData);
+
+      // Schedule a task, in 1 minute send the welcome email to the user.
+      agenda.schedule('in 1 minute', 'todo-saved-email', { email: todoData.email });
 
       return newTodo;
     } catch (error) {
