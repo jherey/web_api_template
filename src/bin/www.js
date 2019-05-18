@@ -1,4 +1,5 @@
 import express from 'express';
+
 import loaders from '../loaders';
 import logger from '../utils/logger';
 import config from '../config';
@@ -10,15 +11,16 @@ import config from '../config';
 async function startServer() {
   const app = express();
 
-  await loaders({ expressApp: app });
+  try {
+    await loaders({ expressApp: app });
 
-  app.listen(config.port, (err) => {
-    if (err) {
-      logger.error(err);
-      return;
-    }
-    logger.info(`Server is listening on port: ${config.port}!`);
-  });
+    app.listen(config.port, () => {
+      logger.info(`Server is listening on port: ${config.port}!`);
+    });
+  } catch (err) {
+    logger.error(err);
+    process.exit(1);
+  }
 }
 
 startServer();
