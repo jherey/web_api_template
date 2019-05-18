@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
+
 import routes from '../routes';
 import config from '../config';
 

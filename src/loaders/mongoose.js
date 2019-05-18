@@ -1,13 +1,20 @@
 import mongoose from 'mongoose';
-import config from '../config';
 
-export default async () => {
-  const defaultOptions = {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: true,
-  };
+/**
+  *@description Function to connect to MongoDB
+  *@param  {string} url
+  *@returns {object} - new mongoDB connection
+  */
+export default async function connectToDatabase(url) {
+  try {
+    const defaultOptions = {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: true,
+    };
 
-  const connection = await mongoose.connect(config.databaseURL, defaultOptions);
-  return connection.connection.db;
-};
+    return await mongoose.connect(url, defaultOptions);
+  } catch (error) {
+    throw error;
+  }
+}
