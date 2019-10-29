@@ -29,4 +29,13 @@ export default {
   agenda: {
     dbCollection: process.env.AGENDA_COLLECTION,
   },
+  redis: {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    ...(process.env.REDIS_PASSWORD && process.env.REDIS_PASSWORD !== '') && { password: process.env.REDIS_PASSWORD },
+  },
+  jobConfig: {
+    retryLimit: 5,
+    retryDelay: 1000, // milliseconds
+  },
 };
